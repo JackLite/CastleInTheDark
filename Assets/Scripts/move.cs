@@ -5,31 +5,49 @@ using System;
 public class move : MonoBehaviour {
 
     private float m_MovementInputValue;
+    private float m_MouseXInputValue;
+    private float m_MouseYInputValue;
+    private float curXRotation;
+    private float curYRotation;
+    private Camera mainCamera;
 
     public float m_Speed = 100f;
 
 	// Use this for initialization
 	void Start () {
-	
-	}
+        mainCamera = GetComponentInChildren<Camera>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        m_MovementInputValue = Input.GetAxis("Vertical");
+        Move();
+        MouseRotate();
+
+    }
+
+    private void FixedUpdate()
+    {
         
-        Rigidbody rig = GetComponent<Rigidbody>();
-        Vector3 newPosition = transform.forward * 100 * m_MovementInputValue * Time.deltaTime;
-        if (m_MovementInputValue > 0)
-        {
-            Debug.Log(newPosition.x);
-            Debug.Log(newPosition.y);
-            Debug.Log(newPosition.z);
-        }
-        rig.MovePosition(rig.position + newPosition);
     }
 
     void Move ()
     {
-
+        m_MovementInputValue = Input.GetAxis("Vertical");
+        
+        Rigidbody rig = GetComponent<Rigidbody>();
+        Vector3 newPosition = transform.forward * m_MovementInputValue * Time.deltaTime;
+        rig.MovePosition(rig.position + newPosition);
     } 
+
+    void MouseRotate()
+    {
+        m_MouseXInputValue = Input.GetAxis("Mouse Y") * Time.deltaTime;
+        m_MouseYInputValue = Input.GetAxis("Mouse X") * Time.deltaTime;
+        curXRotation += m_MouseXInputValue * 10;
+        curYRotation += m_MouseYInputValue * 10;
+        Rigidbody rig = GetComponent<Rigidbody>();
+        rig.transform.rotation = Quaternion.Euler(0, curYRotation, 0);
+        mainCamera.transform.localRotation = Quaternion.Euler(-curXRotation, 0, 0);
+        //Debug.Log(m_MouseXInputValue);
+    }
 }

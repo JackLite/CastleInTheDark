@@ -1,22 +1,25 @@
 fileFormatVersion: 2
-guid: 304846c856b16584887e49414e5c72c4
-timeCreated: 1483354962
+guid: f4423fc1614f700438745cb25cf05a89
+timeCreated: 1486580832
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Camera
-    100002: Lamp
-    100004: //RootNode
-    100006: Plane
-    400000: Camera
-    400002: Lamp
-    400004: //RootNode
-    400006: Plane
-    2300000: Plane
-    3300000: Plane
-    4300000: Plane
-    6400000: Plane
+    100000: //RootNode
+    100002: Shelf
+    100004: Table
+    400000: //RootNode
+    400002: Shelf
+    400004: Table
+    2300000: Shelf
+    2300002: Table
+    3300000: Shelf
+    3300002: Table
+    4300000: Shelf
+    4300002: Table
+    7400000: Shelf|ShelfAction
+    7400002: Shelf|ShelfAction.001
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -37,13 +40,47 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Shelf|ShelfAction.001
+      takeName: Shelf|ShelfAction.001
+      firstFrame: 0
+      lastFrame: 48
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Shelf
+        weight: 1
+      - path: Table
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 10
-    meshCompression: 3
-    addColliders: 1
+    globalScale: 0.01
+    meshCompression: 0
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -57,10 +94,10 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 64
-    normalImportMode: 1
+    normalSmoothAngle: 60
+    normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -77,9 +114,9 @@ ModelImporter:
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
