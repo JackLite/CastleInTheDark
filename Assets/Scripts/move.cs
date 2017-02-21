@@ -43,11 +43,11 @@ public class move : MonoBehaviour {
     {
         m_MouseXInputValue = Input.GetAxis("Mouse Y") * Time.deltaTime;
         m_MouseYInputValue = Input.GetAxis("Mouse X") * Time.deltaTime;
-        curXRotation += m_MouseXInputValue * 10;
-        curYRotation += m_MouseYInputValue * 10;
+        curXRotation += m_MouseXInputValue * 15;
+        curYRotation += m_MouseYInputValue * 15;
         Rigidbody rig = GetComponent<Rigidbody>();
         rig.transform.rotation = Quaternion.Euler(0, curYRotation, 0);
         mainCamera.transform.localRotation = Quaternion.Euler(-curXRotation, 0, 0);
-        //Debug.Log(m_MouseXInputValue);
+        
     }
 }
