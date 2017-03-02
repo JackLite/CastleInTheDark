@@ -11,12 +11,15 @@ public class move : MonoBehaviour {
     private float curXRotation;
     private float curYRotation;
     private Camera mainCamera;
+    private Rigidbody rig;
+    private CharacterController character; 
 
     public float m_Speed = 100f;
 
 	// Use this for initialization
 	void Start () {
         mainCamera = GetComponentInChildren<Camera>();
+        character = GetComponent<CharacterController>();
     }
 	
 	// Update is called once per frame
@@ -25,8 +28,8 @@ public class move : MonoBehaviour {
         MouseRotate();
         if(Input.GetButtonDown("Jump"))
         {
-            Rigidbody rig = GetComponent<Rigidbody>();
-            rig.AddForce(0, 500, 0);
+            //rig.AddForce(0, 500, 0);
+            //rig.AddForce(0, 500, 0);
         }
     }
 
@@ -37,12 +40,12 @@ public class move : MonoBehaviour {
 
     void Move ()
     {
-        m_MovementForBackInputValue = Input.GetAxis("Vertical");
-        m_MovementLeftRightInputValue = Input.GetAxis("Horizontal");
-        Rigidbody rig = GetComponent<Rigidbody>();
-        Vector3 newForwardPosition = transform.forward * m_MovementForBackInputValue * Time.deltaTime * 5;
-        Vector3 newRightPosition = transform.right * m_MovementLeftRightInputValue * Time.deltaTime * 5;
-        rig.MovePosition(rig.position + newForwardPosition + newRightPosition);
+
+        m_MovementForBackInputValue = Input.GetAxis("Horizontal") * Time.deltaTime * 5;
+        m_MovementLeftRightInputValue = Input.GetAxis("Vertical") * Time.deltaTime * 5;
+        Vector3 movement = new Vector3(m_MovementForBackInputValue, -5, m_MovementLeftRightInputValue);
+        movement = transform.TransformDirection(movement);
+        character.Move(movement);
     } 
 
     void MouseRotate()
@@ -51,8 +54,7 @@ public class move : MonoBehaviour {
         m_MouseYInputValue = Input.GetAxis("Mouse X") * Time.deltaTime;
         curXRotation += m_MouseXInputValue * 200;
         curYRotation += m_MouseYInputValue * 200;
-        Rigidbody rig = GetComponent<Rigidbody>();
-        rig.transform.rotation = Quaternion.Euler(0, curYRotation, 0);
+        character.transform.rotation = Quaternion.Euler(0, curYRotation, 0);
         mainCamera.transform.localRotation = Quaternion.Euler(-curXRotation, 0, 0);
     }
 }
