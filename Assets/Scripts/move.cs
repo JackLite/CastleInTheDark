@@ -4,8 +4,7 @@ using System;
 
 public class move : MonoBehaviour {
 
-    private float m_MovementForBackInputValue;
-    private float m_MovementLeftRightInputValue;
+    private Vector3 moveDirection;
     private float m_MouseXInputValue;
     private float m_MouseYInputValue;
     private float curXRotation;
@@ -26,11 +25,8 @@ public class move : MonoBehaviour {
 	void Update () {
         Move();
         MouseRotate();
-        if(Input.GetButtonDown("Jump"))
-        {
-            //rig.AddForce(0, 500, 0);
-            //rig.AddForce(0, 500, 0);
-        }
+       
+        
     }
 
     private void FixedUpdate()
@@ -41,11 +37,17 @@ public class move : MonoBehaviour {
     void Move ()
     {
 
-        m_MovementForBackInputValue = Input.GetAxis("Horizontal") * Time.deltaTime * 5;
-        m_MovementLeftRightInputValue = Input.GetAxis("Vertical") * Time.deltaTime * 5;
-        Vector3 movement = new Vector3(m_MovementForBackInputValue, -5, m_MovementLeftRightInputValue);
-        movement = transform.TransformDirection(movement);
-        character.Move(movement);
+        if (character.isGrounded)
+        {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection *= 5;
+            if (Input.GetButton("Jump"))
+                moveDirection.y = 3;
+
+        }
+        moveDirection.y -= 20 * Time.deltaTime;
+        character.Move(moveDirection * Time.deltaTime);
     } 
 
     void MouseRotate()
@@ -54,6 +56,10 @@ public class move : MonoBehaviour {
         m_MouseYInputValue = Input.GetAxis("Mouse X") * Time.deltaTime;
         curXRotation += m_MouseXInputValue * 200;
         curYRotation += m_MouseYInputValue * 200;
+        if (curXRotation >= 90)
+            curXRotation = 90;
+        else if (curXRotation <= -90)
+            curXRotation = -90;
         character.transform.rotation = Quaternion.Euler(0, curYRotation, 0);
         mainCamera.transform.localRotation = Quaternion.Euler(-curXRotation, 0, 0);
     }
