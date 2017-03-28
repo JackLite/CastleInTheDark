@@ -43,7 +43,7 @@ public class move : MonoBehaviour {
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= 5;
             if (Input.GetButton("Jump"))
-                moveDirection.y = 3;
+                moveDirection.y = 7;
 
         }
         moveDirection.y -= 20 * Time.deltaTime;
