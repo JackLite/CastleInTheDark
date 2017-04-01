@@ -6,8 +6,7 @@ public class Mouse : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Screen.lockCursor = true;
-
+        Cursor.visible = false;
 
     }
 	
