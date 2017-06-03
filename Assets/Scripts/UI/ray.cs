@@ -7,10 +7,12 @@ public class ray : MonoBehaviour
     public float rayDistance = 1f;
 
     private Camera _camera;
+    private GameObject mainIcon;
     // Use this for initialization
     void Start()
     {
         _camera = GetComponent<Camera>();
+        mainIcon = GameObject.Find("mainIcon");
     }
 
     // Update is called once per frame
@@ -25,10 +27,12 @@ public class ray : MonoBehaviour
         {
             GameObject ob = hit.collider.gameObject;
             ob.SendMessage("showName");
+            mainIcon.SendMessage("showAction");
         }
         else
         {
             bottomText.changeText("");
+            mainIcon.SendMessage("showDefault");
         }
     }
 }
