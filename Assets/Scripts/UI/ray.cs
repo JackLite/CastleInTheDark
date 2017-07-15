@@ -23,11 +23,19 @@ public class ray : MonoBehaviour
         Ray ray = _camera.ScreenPointToRay(point);
         RaycastHit hit;
         Physics.Raycast(ray, out hit, rayDistance);
+        
         if (hit.collider)
         {
             GameObject ob = hit.collider.gameObject;
-            ob.SendMessage("showName");
-            mainIcon.SendMessage("showAction");
+            if (ob.tag == "InteractiveObject")
+            {
+                ob.SendMessage("showText");
+                mainIcon.SendMessage("showAction");
+                if(Input.GetKeyDown(KeyCode.F))
+                {
+                    ob.SendMessage("action"); 
+                }
+            }
         }
         else
         {

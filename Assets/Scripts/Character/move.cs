@@ -19,14 +19,13 @@ public class move : MonoBehaviour {
 	void Start () {
         mainCamera = GetComponentInChildren<Camera>();
         character = GetComponent<CharacterController>();
+        character.transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 	
 	// Update is called once per frame
 	void Update () {
         Move();
         MouseRotate();
-       
-        
     }
 
     private void FixedUpdate()
