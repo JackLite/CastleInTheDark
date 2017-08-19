@@ -19,14 +19,13 @@ public class move : MonoBehaviour {
 	void Start () {
         mainCamera = GetComponentInChildren<Camera>();
         character = GetComponent<CharacterController>();
+        character.transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 	
 	// Update is called once per frame
 	void Update () {
         Move();
         MouseRotate();
-       
-        
     }
 
     private void FixedUpdate()
@@ -41,14 +40,14 @@ public class move : MonoBehaviour {
         {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= 5;
+            moveDirection *= m_Speed;
             if (Input.GetButton("Jump"))
                 moveDirection.y = 7;
 
         }
         moveDirection.y -= 20 * Time.deltaTime;
         character.Move(moveDirection * Time.deltaTime);
-    } 
+    }
 
     void MouseRotate()
     {

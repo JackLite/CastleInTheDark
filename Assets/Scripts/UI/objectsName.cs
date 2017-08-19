@@ -9,7 +9,7 @@ public class objectsName : MonoBehaviour {
     {
         return objectName;
     }
-    public void showName()
+    public void showText()
     {
         bottomText.changeText(objectName);
     }
