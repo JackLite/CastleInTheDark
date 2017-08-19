@@ -7,12 +7,14 @@ public static class DoorController {
     public static void openDoor(GameObject door)
     {
         Animator animator = door.GetComponent<Animator>();
-        animator.Play("open");
+        animator.SetBool("isAnimate", true);
+        animator.SetBool("open", true);
 
     }
 	public static void closeDoor(GameObject door)
     {
         Animator animator = door.GetComponent<Animator>();
-        animator.Play("close");
+        animator.SetBool("isAnimate", true);
+        animator.SetBool("close", true);
     }
 }

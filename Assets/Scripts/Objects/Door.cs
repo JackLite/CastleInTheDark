@@ -28,6 +28,11 @@ public class Door : MonoBehaviour
 
     public void action()
     {
+        Animator anim = GetComponent<Animator>();
+        if(anim.GetBool("isAnimate"))
+        {
+            return;
+        }
         if (currentStatus == status.open)
         {
             DoorController.closeDoor(gameObject);
