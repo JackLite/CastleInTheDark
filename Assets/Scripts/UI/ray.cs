@@ -9,13 +9,17 @@ public class ray : MonoBehaviour
     [SerializeField]
     GameObject bottomText;
     [SerializeField]
-    GameObject mainIcon;
+    GameObject MainIcon;
+    [SerializeField]
+    GameObject SceneController;
 
     private Camera _camera;
+    private UIController _controller;
     // Use this for initialization
     void Start()
     {
         _camera = GetComponent<Camera>();
+        _controller = SceneController.GetComponent<UIController>();
     }
 
     // Update is called once per frame
@@ -29,20 +33,26 @@ public class ray : MonoBehaviour
         if (hit.collider)
         {
             GameObject ob = hit.collider.gameObject;
-            if (ob.tag == "InteractiveObject")
+            IInteractivable interactiveObject = ob.GetComponent<IInteractivable>();
+            if(interactiveObject is IInteractivable)
             {
-                ob.SendMessage("showText");
-                mainIcon.SendMessage("showAction");
-                if(Input.GetKeyDown(KeyCode.F))
+                interactiveObject.showText();
+                if (interactiveObject is IActionable)
                 {
-                    ob.SendMessage("action"); 
+                    IActionable actionObject = interactiveObject as IActionable;
+                    MainIcon.GetComponent<UICursorIcon>().showAction();
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        actionObject.doAction();
+                    }
                 }
             }
+            
         }
         else
         {
-            bottomText.GetComponent<Text>().text = "";
-            mainIcon.GetComponent<UICursorIcon>().showDefault();
+            _controller.changeText("");
+            MainIcon.GetComponent<UICursorIcon>().showDefault();
         }
     }
 }

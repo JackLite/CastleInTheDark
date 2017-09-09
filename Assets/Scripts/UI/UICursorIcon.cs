@@ -16,10 +16,12 @@ public class UICursorIcon : MonoBehaviour
     public float widthLook;
     public float heightLook;
 
+    private Image img;
+
     // Use this for initialization
     void Start()
     {
-        Image img = GetComponent<Image>();
+        img = GetComponent<Image>();
         img.sprite = defaultIcon;
         img.SetNativeSize();
     }
@@ -39,23 +41,14 @@ public class UICursorIcon : MonoBehaviour
 
     private void setSprite(Sprite icon)
     {
-        GameObject gameObj = GameObject.Find("mainIcon");
-        Image img = gameObj.GetComponent<Image>();
         img.sprite = icon;
         img.SetNativeSize();
     }
     private void setSprite(Sprite icon, float width, float height)
     {
-        Image img = getImg();
         img.sprite = icon;
         RectTransform transform = img.GetComponent<RectTransform>();
         transform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
         transform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
     }
-    private Image getImg()
-    {
-        GameObject gameObj = GameObject.Find("mainIcon");
-        return gameObj.GetComponent<Image>();
-    }
-
 }
