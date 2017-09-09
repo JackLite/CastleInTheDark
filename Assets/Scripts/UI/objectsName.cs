@@ -2,8 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class objectsName : MonoBehaviour {
+public class objectsName : MonoBehaviour, IInteractivable {
+    [SerializeField]
+    GameObject SceneController;
+
+    private UIController controller;
+
     public string objectName = "Введите название объекта";
+
+    public void Start()
+    {
+        controller = SceneController.GetComponent<UIController>();
+    }
 
     private string getName()
     {
@@ -11,6 +21,6 @@ public class objectsName : MonoBehaviour {
     }
     public void showText()
     {
-        bottomText.changeText(objectName);
+        controller.changeText(objectName);
     }
 }

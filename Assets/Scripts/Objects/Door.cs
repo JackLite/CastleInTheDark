@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : MonoBehaviour, IActionable
 {
+    [SerializeField]
+    GameObject SceneController;
+    private UIController controller;
+
     public string openText = "Открыть";
     public string closeText = "Закрыть";
 
@@ -14,19 +18,24 @@ public class Door : MonoBehaviour
     }
     public status currentStatus = status.close;
 
+    public void Start()
+    {
+        controller = SceneController.GetComponent<UIController>();
+    }
+
     public void showText()
     {
         if (currentStatus == status.open)
         {
-            bottomText.changeText(closeText);
+            controller.changeText(closeText);
         }
         else
         {
-            bottomText.changeText(openText);
+            controller.changeText(openText);
         }
     }
 
-    public void action()
+    public void doAction()
     {
         Animator anim = GetComponent<Animator>();
         if(anim.GetBool("isAnimate"))
